@@ -1,0 +1,121 @@
+[
+  {
+    "category": "Variados",
+    "items": [
+      ["KIT KAT c/24", 80.00, 3.33],
+      ["CHOKITO c/30", 77.00, 2.56],
+      ["PRESTIGIO c/30", 77.00, 2.56],
+      ["DIAMANTE NEGRO c/20", 46.00, 2.30],
+      ["LAKA c/20", 46.00, 2.30],
+      ["TRENTO c/16", 35.00, 2.18],
+      ["DISQUETI c/24", 36.00, 1.50],
+      ["NUTELLA 140g", 11.50, null],
+      ["NUTELLAO 700g", 45.00, null],
+      ["TORTUGUITA c/24", 33.00, 1.37],
+      ["AMASSYXUP C/50", 29.99, 0.60],
+      ["BALA BUTTER TOFFE C/68", 16.80, 0.24],
+      ["OURO BRANCO C/50", 54.99, 1.10],
+      ["BONOBON C/50", 47.99, 0.95],
+      ["BATON AO LEITE C/30", 47.99, 1.59],
+      ["NUTELLA B READY C/10", 39.99, 3.99],
+      ["SNICKERS C/20", 69.99, 3.50],
+      ["SUFLAIR 50G C/20", 99.99, 4.99],
+      ["TRENTO BITES C/12", 41.00, 3.41],
+      ["DOCE BOTICÃO C/20", 22.00, 1.10],
+      ["DOCE RICCO ESPETO C/35", 48.99, 1.39],
+      ["GELEIA DIN DAN C/20", 17.99, 0.89],
+      ["DOCE GIBI C/50", 16.80, 0.33],
+      ["HALLS c/21", 26.50, 1.26],
+      ["FINI DESENHOS C/12", 11.50, 0.95],
+      ["FINI TUBES c/12", 10.00, 0.83],
+      ["FRUITELLA c/15", 34.00, 2.26],
+      ["MENTOS c/16", 32.00, 2.00],
+      ["CHIC BRINQ TATOO c/100", 8.00, 0.08],
+      ["PLUTONITA c/40", 7.50, 0.17],
+      ["TRIDENT c/21", 39.00, 1.85],
+      ["SALG BACON BITS c/10", 24.00, 2.40],
+      ["SALGADINHO BECK+ c/10", 13.00, 1.30],
+      ["SAG POINT BACON c/10", 17.00, 1.70],
+      ["BATATA POINT CHIPS c/24", 35.00, 1.45],
+      ["PIRULITO BIG BIG", 11.50, null],
+      ["TODDY 370g c/3", 27.00, 8.99],
+      ["NESCAU 350g c/3", 29.10, 9.70],
+      ["NISSIN MIOJO C/10", 25.50, 2.55],
+      ["CUP NOODLES C/6", 28.50, 4.75]
+    ]
+  },
+  {
+    "category": "Embalagens",
+    "items": [
+      ["CANUDO PLAZAPEL C/100", 6.00, 0.06],
+      ["COPO 770ML C/25", 10.00, 0.40],
+      ["COPO 550ML C/50", 13.50, 0.27],
+      ["COPO 500ML C/50", 12.00, 0.24],
+      ["TAMPA 700ML C/50", 14.00, 0.28],
+      ["TAMPA 500ML C/50", 7.99, 0.16],
+      ["SACOLA 30x40 5KG", 70.00, 14.00],
+      ["SACOLA 40x50 5KG", 70.00, 14.00]
+    ]
+  },
+  {
+    "category": "Bebidas não alcoólicas",
+    "items": [
+      ["GUARANÁ/PEPSI 2LT c/6", 42.50, 7.08],
+      ["GUARANÁ 1LT C/6", 25.50, 4.25],
+      ["GUARANÁ/PEPSI/SUKITA 200ML", 21.00, 1.75],
+      ["ENERG JACK 2lt c/6", 36.00, 6.00],
+      ["REDBULL 250ML c/4", 33.60, 8.39],
+      ["REDBULL 473ML", 12.99, null],
+      ["MONSTER 473ML C/6", 51.00, 8.49],
+      ["ÁGUA 500ML C/12", 12.00, 1.00],
+      ["ÁGUA 1,5LT C/6", 12.00, 2.00],
+      ["COCA LATA 350ML C/12", 46.00, 3.83],
+      ["COCA COLA 1LT", 7.69, null]
+    ]
+  },
+  {
+    "category": "Tabacaria",
+    "items": [
+      ["ISQUEIRO CHAMA c/50", 50.00, 1.00],
+      ["PITEIRA PAPELITO c/24", 61.00, 2.54],
+      ["BLUNT SABORES c/5", 6.99, 1.39],
+      ["DOURADINHO", 13.00, null],
+      ["BIC MAXI c/12", 55.00, 4.58],
+      ["SEDA ZOMO c/25", 26.50, 1.06],
+      ["TESOURA DOBRÁVEL c/6", 48.00, 7.99],
+      ["DICHAVADOR c/6", 18.00, 2.99]
+    ]
+  },
+  {
+    "category": "Bebidas alcoólicas",
+    "items": [
+      ["MANSÃO MAROMBA c/6", 78.00, 12.99],
+      ["INVICTUS COMBO c/6", 52.50, 8.75],
+      ["GIN INVICTUS c/6", 87.00, 14.49],
+      ["BUSCA BRISA", 31.99, null],
+      ["BOB PINGA", 23.99, null],
+      ["JACK JAMES", 22.99, null],
+      ["JACK JAMES VIKINGS", 31.99, null],
+      ["MORANGO DO AMOR", 21.99, null],
+      ["JAPIRA SABORES", 16.50, null],
+      ["BRISA MÁGICA", 23.99, null],
+      ["WHISKY BOSS c/6", 108.00, 18.00],
+      ["WHITE HORSE 1LT", 69.99, null],
+      ["REDLABEL 1LT", 89.99, null],
+      ["BLACK LABEL 1LT", 159.99, null],
+      ["BUCHANANS DELUXE 1LT", 164.99, null],
+      ["BALLANTINES 1LT", 79.99, null],
+      ["JACK DANIELS 1LT", 129.99, null],
+      ["LICOR 43", 139.99, null],
+      ["LICOR 1985", 49.99, null],
+      ["BALLENA", 110.00, null],
+      ["VODKA ABSOLUT", 79.99, null],
+      ["VODKA ORLOFF", 27.99, null],
+      ["GIN TANQUERAY", 99.99, null],
+      ["GIN BEEFEATER", 86.99, null],
+      ["CONHAQUE PRESIDENTE", 14.00, null],
+      ["CABARÉ ICE c/12", 74.00, 6.16],
+      ["HEINEKEN LATÃO 473ML", 69.60, 5.79]
+    ]
+  }
+]

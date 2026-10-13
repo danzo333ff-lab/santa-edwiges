@@ -65,15 +65,20 @@ em variáveis `NEXT_PUBLIC_*`, no navegador, em commits ou em logs.
 
 ## Catálogo e estoque
 
-A migration cadastra os produtos e preços listados no prompt, incluindo Busca
-Brisa a R$ 31,99 e promoção a R$ 29,99 a partir de 7 unidades. A migration
-`20261013215123_alimentos_catalog.sql` garante a categoria Alimentos e atualiza
-os 40 produtos e preços enviados; caso já existam produtos com esses nomes,
-atualiza seus dados sem zerar o estoque existente. Produtos demonstrativos
-antigos são desativados. Novos produtos começam com estoque zero por segurança;
-registre as entradas reais no painel antes de aceitar pedidos. As imagens
-permanecem vazias até o proprietário ou administrador enviar os arquivos
-prioritários.
+A migration `20261013221029_catalog_expansion.sql` cadastra os 94 produtos e
+preços enviados em cinco categorias. A fonte editável é
+`data/catalog-2026-10-13.json`; execute `node scripts/generate-catalog-assets.mjs`
+para regerar a migration e as ilustrações locais em `public/products/`. Itens
+já cadastrados são atualizados por nome sem zerar o estoque ou substituir uma
+foto real. Busca Brisa mantém a promoção a R$ 29,99 a partir de 7 unidades.
+Os preços unitários informados são exibidos como aproximação, inclusive nos
+casos em que diferem por arredondamento do preço do pacote.
+
+As 94 imagens atuais são ilustrações provisórias, identificadas como tal; não
+representam fielmente marcas ou embalagens. Fotos reais podem ser enviadas pelo
+painel administrativo e têm prioridade sobre a arte local. Novos produtos
+começam com estoque zero por segurança; registre as entradas reais no painel
+antes de aceitar pedidos.
 
 ## Verificações
 
@@ -92,13 +97,13 @@ considerados aprovados apenas pelo build.
 ## Estado da integração
 
 As migrations versionadas foram aplicadas ao projeto Supabase configurado em
-`.env.local`, com 41 produtos ativos e estoque inicial zero. O arquivo local
-contém apenas URL e chave pública; cada ambiente Vercel precisa das mesmas
-variáveis públicas. A chave service-role e os dados do administrador devem ser
-configurados separadamente, sem commit.
+`.env.local`, com 94 produtos ativos e estoque inicial zero. O arquivo local
+contém apenas URL e chave pública; as mesmas variáveis públicas estão nos
+ambientes de produção, prévia e desenvolvimento da Vercel. A chave service-role
+e os dados do administrador devem ser configurados separadamente, sem commit.
 
-Ainda faltam imagens fornecidas pelo proprietário e testes reais de Auth, RLS,
-Storage, Realtime e concorrência com usuários de teste. Execute esses cenários
+Ainda faltam fotos reais fornecidas pelo proprietário e testes reais de Auth,
+RLS, Storage, Realtime e concorrência com usuários de teste. Execute esses cenários
 antes de liberar pedidos reais. As migrations versionadas são a fonte oficial
 do banco; `supabase/schema.sql` é apenas um aviso de compatibilidade e não deve
 ser executado.
