@@ -77,6 +77,11 @@ const currency = new Intl.NumberFormat("pt-BR", {
 });
 
 const categoryIcons: Record<string, string> = {
+  variados: "🍬",
+  embalagens: "🥡",
+  "bebidas nao alcoolicas": "🥤",
+  tabacaria: "📦",
+  "bebidas alcoolicas": "🍷",
   bebidas: "🥤",
   graos: "🌾",
   higiene: "🧻",
@@ -967,7 +972,7 @@ export default function Storefront({
                     </div>
                     {product.unitPriceDisplay && (
                       <div className="unit-price-note">
-                        ≈ {currency.format(product.unitPriceDisplay)} por unidade
+                        ≈ {currency.format(product.unitPriceDisplay)} — preço unitário informado
                       </div>
                     )}
                     {product.bulkMin && product.bulkPrice !== undefined && (
