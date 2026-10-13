@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { z } from "zod";
 import type { Product } from "@/lib/products";
+import productImageSources from "@/data/product-image-sources.json";
 import {
   calculateOrderTotal,
   calculateUnitPrice,
@@ -947,12 +948,18 @@ export default function Storefront({
                   <span>Tente outro nome ou escolha outra categoria.</span>
                 </div>
               ) : (
-                visibleProducts.map((product) => (
-                  <article className="product" key={product.id}>
+                visibleProducts.map((product) => {
+                  const photo = productImageSources.find(
+                    (source) => source.name === product.name &&
+                      (!product.imageUrl || product.imageUrl.endsWith(".svg") || product.imageUrl === source.localPath),
+                  );
+                  const displayImageUrl = photo?.localPath ?? product.imageUrl;
+                  return (
+                    <article className="product" key={product.id}>
                     <div className="product-img">
-                      {product.imageUrl ? (
+                      {displayImageUrl ? (
                         <Image
-                          src={product.imageUrl}
+                          src={displayImageUrl}
                           alt={product.name}
                           width={420}
                           height={420}
@@ -962,6 +969,14 @@ export default function Storefront({
                         <span className="product-placeholder">Imagem indisponível</span>
                       )}
                     </div>
+                    {photo && (
+                      <small className="product-photo-credit">
+                        {photo.depiction === "unidade" ? "Foto da unidade" : "Foto do produto"}: {" "}
+                        <a href={photo.sourceUrl} target="_blank" rel="noreferrer">
+                          {photo.source === "food" ? "Open Food Facts" : "Open Products Facts"}
+                        </a>
+                      </small>
+                    )}
                     <h3>{product.name}</h3>
                     <p>
                       {categoryLabel(product.category)} · {product.description}
@@ -996,8 +1011,9 @@ export default function Storefront({
                           ? "Supabase não configurado"
                           : "Adicionar ao pedido"}
                     </button>
-                  </article>
-                ))
+                    </article>
+                  );
+                })
               )}
             </div>
           </section>
@@ -1648,6 +1664,9 @@ export default function Storefront({
         <strong>Santa Edwiges</strong>
         <br />
         Distribuidora · Pedidos online
+        <br />
+        Fotos de produtos sob licença {" "}
+        <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noreferrer">CC BY-SA 3.0</a>
       </footer>
     </>
   );
