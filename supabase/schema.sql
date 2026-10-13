@@ -1,0 +1,3 @@
+-- The versioned migrations in ./migrations are the only supported schema source.
+-- Apply them in timestamp order; do not run the superseded insecure prototype
+-- schema directly against an existing or production Supabase project.
