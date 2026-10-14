@@ -367,6 +367,11 @@ a {
   grid-template-columns: minmax(0, 1fr) 340px;
 }
 
+.layout > * {
+  /* Keep the scrolling category tabs from widening the catalog column. */
+  min-width: 0;
+}
+
 .catalog-tools {
   margin-bottom: 22px;
   padding: 16px;
@@ -1186,7 +1191,7 @@ a {
 
 @media (max-width: 900px) {
   .layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .sidebar {
@@ -1269,7 +1274,11 @@ a {
   }
 
   .products {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .product-img {
+    height: clamp(140px, 40vw, 180px);
   }
 
   .layout,
