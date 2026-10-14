@@ -18,8 +18,8 @@ pedidos, pagamentos, estoque, imagens e eventos administrativos usam Supabase;
    incluindo `20261013215123_alimentos_catalog.sql`, no SQL Editor do Supabase.
    Para instalações gerenciadas pelo CLI, use o fluxo versionado de
    `supabase db push`.
-3. Configure confirmação de e-mail e as URLs de redirecionamento no painel do
-   Supabase Auth antes de disponibilizar cadastros públicos.
+3. Configure confirmação de e-mail e inclua a URL publicada da loja entre as
+   URLs de redirecionamento no Supabase Auth antes de disponibilizar cadastros.
 4. Instale dependências e inicie o Next.js:
 
 ```powershell
@@ -42,8 +42,18 @@ npm.cmd run seed:admin
 ```
 
 O script usa a chave service-role somente em processo Node no servidor para
-criar/atualizar o usuário e conceder a função no perfil. Não exponha essa chave
-em variáveis `NEXT_PUBLIC_*`, no navegador, em commits ou em logs.
+criar o usuário e conceder a função no perfil. Se a conta já existe, preserva
+a senha alterada pelo administrador. Não exponha a chave em variáveis
+`NEXT_PUBLIC_*`, no navegador, em commits ou em logs. Configure `ADMIN_EMAIL`
+também nos ambientes da Vercel. O administrador entra em `/admin/login` com o
+usuário registrado em `settings.admin_username` e pode trocar usuário e senha
+em **Perfil do administrador**.
+
+O catálogo fica público. Para adicionar produtos ao carrinho ou fazer pedidos,
+o cliente cria uma conta com nome, telefone, e-mail e senha, confirma o e-mail
+quando solicitado e entra na loja. Endereço e outros dados de entrega podem ser
+incluídos depois em **Meu perfil**. Novos clientes recebem status ativo após o
+cadastro; contas bloqueadas continuam impedidas de comprar.
 
 ## Segurança e operações críticas
 
@@ -74,8 +84,8 @@ foto real. Busca Brisa mantém a promoção a R$ 29,99 a partir de 7 unidades.
 Os preços unitários informados são exibidos como aproximação, inclusive nos
 casos em que diferem por arredondamento do preço do pacote.
 
-As 94 imagens atuais são ilustrações provisórias, identificadas como tal; não
-representam fielmente marcas ou embalagens. Fotos reais podem ser enviadas pelo
+Dezenove produtos têm fotos verificadas; os outros 75 mantêm ilustrações até a
+marca ou variante ser confirmada. Fotos próprias podem ser enviadas pelo
 painel administrativo e têm prioridade sobre a arte local. Novos produtos
 começam com estoque zero por segurança; registre as entradas reais no painel
 antes de aceitar pedidos.
@@ -98,9 +108,9 @@ considerados aprovados apenas pelo build.
 
 As migrations versionadas foram aplicadas ao projeto Supabase configurado em
 `.env.local`, com 94 produtos ativos e estoque inicial zero. O arquivo local
-contém apenas URL e chave pública; as mesmas variáveis públicas estão nos
+contém URL, chave pública e e-mail administrativo; as variáveis públicas estão nos
 ambientes de produção, prévia e desenvolvimento da Vercel. A chave service-role
-e os dados do administrador devem ser configurados separadamente, sem commit.
+e a senha do administrador devem ser configuradas separadamente, sem commit.
 
 Ainda faltam fotos reais fornecidas pelo proprietário e testes reais de Auth,
 RLS, Storage, Realtime e concorrência com usuários de teste. Execute esses cenários

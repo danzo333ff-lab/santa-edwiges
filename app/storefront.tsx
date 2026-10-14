@@ -170,7 +170,7 @@ export default function Storefront({
   const [cart, setCart] = useState<Record<number, number>>({});
   const [currentUser, setCurrentUser] = useState<Customer | null>(null);
   const [accountOpen, setAccountOpen] = useState(false);
-  const [loginPhone, setLoginPhone] = useState("");
+  const [loginEmail, setLoginEmail] = useState("");
   const [loginCompany, setLoginCompany] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [loginContact, setLoginContact] = useState("");
@@ -430,6 +430,11 @@ export default function Storefront({
   };
 
   const addToCart = (product: Product) => {
+    if (!currentUser) {
+      setCheckoutLoginNotice(true);
+      openAccount();
+      return;
+    }
     if ((cart[product.id] ?? 0) >= product.stock) {
       setOrderNotice(`Estoque disponível insuficiente para ${product.name}.`);
       return;
@@ -442,6 +447,11 @@ export default function Storefront({
   };
 
   const changeQuantity = (productId: number, difference: number) => {
+    if (!currentUser) {
+      setCheckoutLoginNotice(true);
+      openAccount();
+      return;
+    }
     setCart((current) => {
       const quantity = (current[productId] ?? 0) + difference;
       if (quantity <= 0) {
@@ -467,15 +477,11 @@ export default function Storefront({
   };
 
   const loginCustomer = async () => {
-    const email = loginPhone.trim().toLowerCase();
+    const email = loginEmail.trim().toLowerCase();
     const company = loginCompany.trim();
     const password = loginPassword;
     if (!z.string().email().safeParse(email).success) {
       setLoginError("Informe um e-mail válido.");
-      return;
-    }
-    if (creatingAccount && company.length < 2) {
-      setLoginError("Informe o nome da empresa.");
       return;
     }
     if (creatingAccount && loginContact.trim().length < 2) {
@@ -499,8 +505,9 @@ export default function Storefront({
           email,
           password,
           options: {
+            emailRedirectTo: window.location.origin,
             data: {
-              empresa: company,
+              empresa: company || loginContact.trim(),
               responsavel: loginContact.trim(),
               telefone: loginPhoneNumber.trim(),
             },
@@ -509,7 +516,7 @@ export default function Storefront({
         if (error) throw error;
         if (!data.session || !data.user) {
           setLoginError(
-            "Conta criada. Confirme seu e-mail para ativar o acesso; a equipe aprovará o cadastro antes do primeiro pedido.",
+            "Se este e-mail ainda não estiver cadastrado, confira sua caixa de entrada para confirmar a conta e depois entre com sua senha.",
           );
           return;
         }
@@ -661,7 +668,7 @@ export default function Storefront({
     const phone = profilePhone.trim();
     if (company.length < 2) {
       setProfileNoticeIsError(true);
-      setProfileNotice("Informe o nome da empresa.");
+      setProfileNotice("Informe um nome para exibição.");
       return;
     }
     if (phone.replace(/\D/g, "").length < 10) {
@@ -702,7 +709,7 @@ export default function Storefront({
       setProfileCompany(company);
       setProfilePhone(phone);
       setProfileNoticeIsError(false);
-      setProfileNotice(`Dados da empresa atualizados com sucesso.${emailNotice}`);
+      setProfileNotice(`Perfil atualizado com sucesso.${emailNotice}`);
     } catch (error) {
       setProfileNoticeIsError(true);
       setProfileNotice(
@@ -738,7 +745,7 @@ export default function Storefront({
   };
 
   const sendPasswordReset = async () => {
-    const email = loginPhone.trim().toLowerCase();
+    const email = loginEmail.trim().toLowerCase();
     if (!z.string().email().safeParse(email).success) {
       setLoginError("Informe seu e-mail para receber o link de recuperação.");
       return;
@@ -784,7 +791,7 @@ export default function Storefront({
             <button className="account-btn" type="button" onClick={openAccount}>
               👤 <span className="account-name">{currentUser?.company ?? "Entrar"}</span>
             </button>
-            <a className="account-btn admin-store-link" href="/admin">Administração</a>
+            <a className="account-btn admin-store-link" href="/admin/login">Administração</a>
             <button
               className="cart-btn"
               type="button"
@@ -1009,7 +1016,9 @@ export default function Storefront({
                         ? "Sem estoque"
                         : !backendConfigured
                           ? "Supabase não configurado"
-                          : "Adicionar ao pedido"}
+                          : currentUser
+                            ? "Adicionar ao pedido"
+                            : "Entre para adicionar"}
                     </button>
                     </article>
                   );
@@ -1106,7 +1115,7 @@ export default function Storefront({
             </button>
             {checkoutLoginNotice && (
               <p className="login-required show">
-                Entre na sua conta para finalizar o pedido.
+                Entre na sua conta para adicionar produtos ou finalizar o pedido.
               </p>
             )}
             {checkoutOpen && (
@@ -1209,7 +1218,7 @@ export default function Storefront({
               <p className="subtitle" id="accountSubtitle">
                 {currentUser
                   ? "Consulte seus dados e acompanhe o histórico dos pedidos feitos por esta conta."
-                  : "Entre com seu número de telefone e o nome da empresa para acessar seus pedidos."}
+                  : "Entre com seu e-mail e senha ou crie uma conta com nome, telefone e e-mail."}
               </p>
             </div>
             <button
@@ -1236,10 +1245,10 @@ export default function Storefront({
                     Sair
                   </button>
                 </div>
-                <h3 className="profile-section-title">Perfil da empresa</h3>
+              <h3 className="profile-section-title">Meu perfil e endereço de entrega</h3>
                 <div className="profile-fields">
                   <div>
-                    <label htmlFor="profileCompany">Nome da empresa</label>
+                    <label htmlFor="profileCompany">Nome para exibição / empresa</label>
                     <input
                       id="profileCompany"
                       autoComplete="organization"
@@ -1358,7 +1367,7 @@ export default function Storefront({
                     type="button"
                     onClick={saveCustomerProfile}
                   >
-                    Salvar dados da empresa
+                    Salvar perfil
                   </button>
                 </div>
                 {profileNotice && (
@@ -1378,7 +1387,7 @@ export default function Storefront({
                         id="newPassword"
                         type="password"
                         autoComplete="new-password"
-                        placeholder="Mínimo de 6 caracteres"
+                        placeholder="Mínimo de 8 caracteres"
                         value={newPassword}
                         onChange={(event) => setNewPassword(event.target.value)}
                       />
@@ -1471,20 +1480,20 @@ export default function Storefront({
             <div className="login-card">
             <h3>{creatingAccount ? "Criar acesso de cliente" : "Entrar na conta"}</h3>
               <p className="subtitle">
-              A autenticação e os dados da conta são protegidos pelo Supabase.
+              Cadastre nome, telefone, e-mail e senha para fazer pedidos.
             </p>
-            <label htmlFor="loginPhone">E-mail</label>
+            <label htmlFor="loginEmail">E-mail</label>
             <input
-              id="loginPhone"
+              id="loginEmail"
               type="email"
               autoComplete="email"
               placeholder="empresa@email.com"
-              value={loginPhone}
-              onChange={(event) => setLoginPhone(event.target.value)}
+              value={loginEmail}
+              onChange={(event) => setLoginEmail(event.target.value)}
             />
             {creatingAccount && (
               <>
-                <label htmlFor="loginCompany">Nome da empresa</label>
+                <label htmlFor="loginCompany">Nome da empresa (opcional)</label>
                 <input
                   id="loginCompany"
                   type="text"
@@ -1493,7 +1502,7 @@ export default function Storefront({
                   value={loginCompany}
                   onChange={(event) => setLoginCompany(event.target.value)}
                 />
-                <label htmlFor="loginContact">Nome do responsável</label>
+                <label htmlFor="loginContact">Seu nome</label>
                 <input
                   id="loginContact"
                   type="text"
@@ -1502,7 +1511,7 @@ export default function Storefront({
                   value={loginContact}
                   onChange={(event) => setLoginContact(event.target.value)}
                 />
-                <label htmlFor="loginPhoneNumber">WhatsApp</label>
+                <label htmlFor="loginPhoneNumber">Telefone / WhatsApp</label>
                 <input
                   id="loginPhoneNumber"
                   type="tel"

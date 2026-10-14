@@ -69,7 +69,7 @@ async function AdminContent() {
 
   const supabase = await createClient();
   const { data: authData, error: authError } = await supabase.auth.getUser();
-  if (authError || !authData.user) redirect("/?admin=login");
+  if (authError || !authData.user) redirect("/admin/login");
 
   const { data: profile, error: profileError } = await supabase
     .from("profiles")

@@ -111,6 +111,10 @@ export default function AdminDashboard({
   const [editingProductId, setEditingProductId] = useState<number | null>(null);
   const [stockInputs, setStockInputs] = useState<Record<number, string>>({});
   const [commercialSettings, setCommercialSettings] = useState(initialSettings);
+  const [adminUsername, setAdminUsername] = useState(initialSettings.admin_username ?? "");
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const canAdminister = role === "admin";
   const editingProduct = products.find((product) => product.id === editingProductId);
   const lowStock = products.filter(
@@ -328,6 +332,40 @@ export default function AdminDashboard({
       });
       if (error) throw new Error(error.message);
     }, "Regra comercial atualizada.");
+  };
+
+  const saveAdminUsername = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!/^[a-z][a-z0-9._-]{2,31}$/.test(adminUsername)) {
+      setErrorNotice(true);
+      setNotice("Use de 3 a 32 caracteres: letras minúsculas, números, ponto, hífen ou sublinhado.");
+      return;
+    }
+    await run(async () => {
+      const { error } = await createClient().rpc("update_admin_username", {
+        p_username: adminUsername,
+      });
+      if (error) throw new Error(error.message);
+    }, "Usuário administrativo atualizado.");
+  };
+
+  const saveAdminPassword = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (newPassword.length < 8 || newPassword !== confirmPassword || !currentPassword) {
+      setErrorNotice(true);
+      setNotice("Informe a senha atual e confirme a nova senha com pelo menos 8 caracteres.");
+      return;
+    }
+    await run(async () => {
+      const { error } = await createClient().auth.updateUser({
+        current_password: currentPassword,
+        password: newPassword,
+      });
+      if (error) throw new Error(error.message);
+      setCurrentPassword("");
+      setNewPassword("");
+      setConfirmPassword("");
+    }, "Senha administrativa atualizada.");
   };
 
   return (
@@ -594,6 +632,40 @@ export default function AdminDashboard({
                   <button className="admin-secondary" type="button" onClick={() => void saveSetting(key)}>Salvar</button>
                 </label>
               ))}
+            </div>
+          </section>
+        )}
+
+        {canAdminister && (
+          <section className="admin-section">
+            <div className="admin-section-heading">
+              <div><p className="admin-eyebrow">CONTA</p><h2>Perfil do administrador</h2></div>
+            </div>
+            <div className="admin-credentials">
+              <form onSubmit={(event) => void saveAdminUsername(event)}>
+                <h3>Alterar usuário</h3>
+                <label htmlFor="admin-profile-username">Usuário de acesso</label>
+                <input
+                  id="admin-profile-username"
+                  autoComplete="username"
+                  value={adminUsername}
+                  onChange={(event) => setAdminUsername(event.target.value.toLowerCase())}
+                  minLength={3}
+                  maxLength={32}
+                  required
+                />
+                <button className="admin-secondary" type="submit">Salvar usuário</button>
+              </form>
+              <form onSubmit={(event) => void saveAdminPassword(event)}>
+                <h3>Alterar senha</h3>
+                <label htmlFor="admin-current-password">Senha atual</label>
+                <input id="admin-current-password" type="password" autoComplete="current-password" value={currentPassword} onChange={(event) => setCurrentPassword(event.target.value)} required />
+                <label htmlFor="admin-new-password">Nova senha</label>
+                <input id="admin-new-password" type="password" autoComplete="new-password" value={newPassword} onChange={(event) => setNewPassword(event.target.value)} minLength={8} required />
+                <label htmlFor="admin-confirm-password">Confirmar nova senha</label>
+                <input id="admin-confirm-password" type="password" autoComplete="new-password" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} minLength={8} required />
+                <button className="admin-secondary" type="submit">Atualizar senha</button>
+              </form>
             </div>
           </section>
         )}
