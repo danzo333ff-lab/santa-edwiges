@@ -132,42 +132,6 @@
     "quantity": "350g"
   },
   {
-    "name": "GUARANÁ 1LT C/6",
-    "code": "7891991002561",
-    "source": "food",
-    "depiction": "unidade",
-    "localPath": "/products/photos/guarana-1lt-c-6.jpg",
-    "sourceUrl": "https://world.openfoodfacts.org/product/7891991002561",
-    "imageUrl": "https://images.openfoodfacts.org/images/products/789/199/100/2561/front_pt.4.400.jpg",
-    "productName": "guaraná antartica",
-    "brands": "Antártica",
-    "quantity": "1, 1l"
-  },
-  {
-    "name": "REDBULL 250ML c/4",
-    "code": "9002490243944",
-    "source": "food",
-    "depiction": "unidade",
-    "localPath": "/products/photos/redbull-250ml-c-4.jpg",
-    "sourceUrl": "https://world.openfoodfacts.org/product/9002490243944",
-    "imageUrl": "https://images.openfoodfacts.org/images/products/900/249/024/3944/front_en.3.400.jpg",
-    "productName": "Energético Red Bull Energy Drink 250ml",
-    "brands": "Red Bull",
-    "quantity": "250ml"
-  },
-  {
-    "name": "REDBULL 473ML",
-    "code": "9002490214166",
-    "source": "food",
-    "depiction": "produto",
-    "localPath": "/products/photos/redbull-473ml.jpg",
-    "sourceUrl": "https://world.openfoodfacts.org/product/9002490214166",
-    "imageUrl": "https://images.openfoodfacts.org/images/products/900/249/021/4166/front_en.4.400.jpg",
-    "productName": "Red Bull Energy Drink",
-    "brands": "Red Bull",
-    "quantity": "473 ml"
-  },
-  {
     "name": "COCA LATA 350ML C/12",
     "code": "7894900010015",
     "source": "food",
