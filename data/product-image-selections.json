@@ -1,0 +1,21 @@
+[
+  {"name":"KIT KAT c/24","code":"7891000248799","source":"food","depiction":"unidade"},
+  {"name":"CHOKITO c/30","code":"7891000462300","source":"food","depiction":"unidade"},
+  {"name":"PRESTIGIO c/30","code":"7891000460207","source":"food","depiction":"unidade"},
+  {"name":"DIAMANTE NEGRO c/20","code":"7622300862282","source":"food","depiction":"unidade"},
+  {"name":"NUTELLA 140g","code":"7898024395232","source":"food","depiction":"produto"},
+  {"name":"NUTELLA B READY C/10","code":"7898024397915","source":"food","depiction":"unidade"},
+  {"name":"OURO BRANCO C/50","code":"78939318","source":"food","depiction":"unidade"},
+  {"name":"BATON AO LEITE C/30","code":"78912359","source":"food","depiction":"unidade"},
+  {"name":"SNICKERS C/20","code":"7896423420180","source":"food","depiction":"unidade"},
+  {"name":"TODDY 370g c/3","code":"7892840819507","source":"food","depiction":"unidade"},
+  {"name":"NESCAU 350g c/3","code":"7891000412855","source":"food","depiction":"unidade"},
+  {"name":"COCA LATA 350ML C/12","code":"7894900010015","source":"food","depiction":"unidade"},
+  {"name":"COCA COLA 1LT","code":"7894900011715","source":"food","depiction":"produto"},
+  {"name":"BUCHANANS DELUXE 1LT","code":"50196364","source":"food","depiction":"produto"},
+  {"name":"REDLABEL 1LT","code":"5000267013602","source":"food","depiction":"produto"},
+  {"name":"BLACK LABEL 1LT","code":"5000267023601","source":"food","depiction":"produto"},
+  {"name":"BALLANTINES 1LT","code":"5000299606070","source":"food","depiction":"produto"},
+  {"name":"JACK DANIELS 1LT","code":"0082184089996","source":"food","depiction":"produto"},
+  {"name":"HEINEKEN LATÃO 473ML","code":"7896045506248","source":"food","depiction":"unidade"}
+]
