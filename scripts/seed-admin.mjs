@@ -35,12 +35,7 @@ while (!user) {
 }
 
 if (user) {
-  const { data, error } = await supabase.auth.admin.updateUserById(user.id, {
-    password,
-    email_confirm: true,
-  });
-  if (error) throw new Error(`Não foi possível atualizar a conta: ${error.message}`);
-  user = data.user;
+  console.info("A conta já existe; a senha atual será preservada.");
 } else {
   const { data, error } = await supabase.auth.admin.createUser({
     email,

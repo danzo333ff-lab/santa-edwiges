@@ -1721,6 +1721,54 @@ a {
   }
 }
 
+.admin-login-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 32px 16px;
+  background: #f7f4ee;
+}
+
+.admin-login-card {
+  display: grid;
+  gap: 12px;
+  width: min(100%, 440px);
+  padding: 32px;
+  border: 1px solid #eadfcc;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 18px 45px #33231214;
+}
+
+.admin-login-card h1 { margin: 0; font-size: 2rem; }
+.admin-login-card p { margin: 0 0 8px; }
+.admin-login-card label { font-weight: 700; }
+.admin-login-card input,
+.admin-credentials input {
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid #d9cebc;
+  border-radius: 8px;
+  background: #fff;
+  color: #2d261f;
+}
+.admin-login-back { color: #6b5030; text-decoration: none; }
+.admin-login-card .admin-primary { margin-top: 10px; }
+
+.admin-credentials {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.admin-credentials form { display: grid; gap: 10px; align-content: start; }
+.admin-credentials h3 { margin: 0; }
+.admin-credentials p { margin: 0; }
+
+@media (max-width: 640px) {
+  .admin-login-card { padding: 24px; }
+  .admin-credentials { grid-template-columns: 1fr; }
+}
+
 @media print {
   body * {
     visibility: hidden;
