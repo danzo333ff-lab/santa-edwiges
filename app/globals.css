@@ -1224,11 +1224,31 @@ a {
 
 @media (max-width: 560px) {
   .header-inner {
-    padding: 7px 13px;
+    padding: 10px 13px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .brand {
+    align-self: flex-start;
   }
 
   .header-actions {
-    gap: 6px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: 5px;
+  }
+
+  .header-actions > * {
+    min-width: 0;
+  }
+
+  .header-actions > .account-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
   }
 
   .brand-name {
@@ -1243,20 +1263,27 @@ a {
   .brand-logo {
     width: 50px;
     height: 50px;
+    flex-shrink: 0;
   }
 
   .account-btn {
-    padding: 9px 10px;
-    font-size: 13px;
+    padding: 9px 5px;
+    font-size: 12px;
   }
 
   .account-name {
-    max-width: 75px;
+    min-width: 0;
+    max-width: 100%;
   }
 
   .cart-btn {
-    padding: 10px 9px;
-    font-size: 13px;
+    padding: 10px 5px;
+    font-size: 12px;
+  }
+
+  .cart-count {
+    margin-left: 2px;
+    padding: 2px 5px;
   }
 
   .hero-home h1 {
