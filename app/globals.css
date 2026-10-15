@@ -1306,6 +1306,14 @@ a {
 
   .product-img {
     height: clamp(140px, 40vw, 180px);
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+  }
+
+  .product-img img {
+    min-width: 0;
+    min-height: 0;
+    max-height: 100%;
   }
 
   .layout,
